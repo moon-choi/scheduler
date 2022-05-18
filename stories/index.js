@@ -5,10 +5,12 @@ import "index.scss";
 import Button from "components/Button";
 import DayListItem from "components/DayListItem"
 import DayList from "components/DayList"
+import InterviewerListItem from "components/InterviewrListItem"
+import InterviewerList from "components/InterviewrList"
 
 // import 했으니까 index가 parent, import 됀 것들은 child.
 
-//=============== BUTTON ==============//
+//=============== BUTTON ===============//
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -25,7 +27,7 @@ storiesOf("Button", module)
     </Button>
   ));
 
-//=============== DAY LIST ITEM ==============//
+//============= DAY LIST ITEM ============//
 storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -55,9 +57,9 @@ const days = [
   },
 ];
 
-//=============== DAY LIST =============//
+//=============== DAY LIST ==============//
 
-// THESE ARE THE PROPS 
+//// THESE ARE THE PROPS ////
 
 storiesOf("DayList", module)
   .addParameters({
@@ -75,3 +77,45 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
   ));
 
+
+//========== INTERVIEWER LIST ITEM =========//
+
+//// THESE ARE THE PROPS ////
+
+const interviewer = {
+  id: 1,
+  name: "Sylvia Palmer",
+  avatar: "https://i.imgur.com/LpaY82x.png"
+};
+
+storiesOf("InterviewerListItem", module)
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+  })
+  .add("Unselected", () => (
+    <InterviewerListItem
+      id={interviewer.id}
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+    />
+  ))
+  .add("Selected", () => (
+    <InterviewerListItem
+      id={interviewer.id}
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+      selected
+    />
+  ))
+  .add("Clickable", () => (
+    <InterviewerListItem
+      id={interviewer.id}
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+      setInterviewer={action("setInterviewer")}
+    />
+  ));
+
+
+
+//============= INTERVIEWER LIST ===========//
