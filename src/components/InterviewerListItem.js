@@ -9,20 +9,14 @@ export default function InterviewerListItem(props) {
   });
 
   return (
-    <li className={interviewerClass} onClick={() => props.setInterviewer(props.id)} >
+    <li className={interviewerClass} onClick={props.setInterviewer} >
       <img
         className="interviewers__item-image"
         src={props.avatar}
         alt={props.name}
       />
-      {/* syntax 1 */}
       {props.selected && props.name}
-
-      {/* syntax 2 */}
-      {/* {props.selected && <>props.name</>}
-      
-      {/* syntax 3*/}
-      {/* {props.selected && <>{props.name}</>} */}
+      {/* OR {props.selected && <>{props.name}</>} */}
     </li>
   );
 }
