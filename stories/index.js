@@ -68,10 +68,10 @@ storiesOf("DayList", module)
     //day is selector, // setDay is an action
   ))
 
-  // .add("Tuesday", () => (
-  //   <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
-  // ))
-  // .add("Wednesday", () => (
-  //   <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
-  // ));
+  .add("Tuesday", () => (
+    <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
+  ))
+  .add("Wednesday", () => (
+    <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
+  ));
 
