@@ -15,7 +15,7 @@ const formatSpots = (spots) => {
 }
 */
 
-// solution 2. short circuiting
+// solution 2. short circuiting with Jordan
 
 export default function DayListItem(props) {
 
