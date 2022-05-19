@@ -1,14 +1,16 @@
 import React from "react";
 import "./styles.scss";
+import Header from "./Header";
+import Empty from "./Empty";
+import Show from "./Show";
 
-export default function Appointment() {
+export default function Appointment(props) {
   return (
     <>
-      <header className="appointment__time">
-        <h4 className="text--semi-bold">12pm</h4>
-        <hr className="appointment__separator" />
-      </header>
+      <Header />
       <article className="appointment"></article>
+      {props.interview ? <Empty /> : <Show />}
+      {/* it's JS */}
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from 'react'
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import "index.scss"; //jsconfig.json
@@ -15,7 +15,6 @@ import Confirm from "components/Appointment/Confirm.js";
 import Status from "components/Appointment/Status.js";
 import Error from "components/Appointment/Error.js";
 import Form from "components/Appointment/Form.js";
-
 
 // import 했으니까 index가 parent, import 됀 것들은 child.
 
@@ -179,5 +178,14 @@ storiesOf("Appointment", module)
   .add("Status", () => <Status message="Deleting" />)
   .add("Error", () => <Error message="Could not delete appointment." onClose={action("onClose")} />)
   .add("Edit", () => <Form student="Moon Choi" interviewer={4} interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} />)
-  .add("Create", () => <Form interviewers={interviewers} onSave={action("I am Save")} onCancel={action("onCancel")} />)
+  .add("Create", () => <Form interviewers={interviewers} onSave={action("I am Save")}
+    onCancel={action("onCancel")} />)
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
+
+
 // "" <- storybook will tell you what was called.
