@@ -179,6 +179,7 @@ storiesOf("Appointment", module)
   .add("Error", () => <Error message="Could not delete appointment." onClose={action("onClose")} />)
   .add("Edit", () => <Form student="Moon Choi" interviewer={4} interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} />)
   .add("Create", () => <Form interviewers={interviewers} onSave={action("I am Save")}
+
     onCancel={action("onCancel")} />)
   .add("Appointment Empty", () => (
     <Fragment>
@@ -186,6 +187,14 @@ storiesOf("Appointment", module)
       <Appointment time="5pm" />
     </Fragment>
   ))
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
 
-
-// "" <- storybook will tell you what was called.

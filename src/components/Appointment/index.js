@@ -9,8 +9,7 @@ export default function Appointment(props) {
     <>
       <Header />
       <article className="appointment"></article>
-      {props.interview ? <Empty /> : <Show />}
-      {/* it's JS */}
+      {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer.name} /> : <Empty />}
     </>
   )
 }
