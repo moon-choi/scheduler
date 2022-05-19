@@ -6,10 +6,10 @@ import Show from "./Show";
 
 export default function Appointment(props) {
   return (
-    <>
-      <Header />
-      <article className="appointment"></article>
+    <article className="appointment">
+      <Header time={props.time} />
+      {/* Header should contqain props.time value */}
       {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer.name} /> : <Empty />}
-    </>
+    </article>
   )
 }

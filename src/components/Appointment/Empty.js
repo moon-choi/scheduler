@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Show from "./Show";
+import React from "react";
 
 export default function Empty(props) {
   return (
