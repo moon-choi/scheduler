@@ -9,6 +9,7 @@ import InterviewerListItem from "components/InterviewerListItem"
 import InterviewerList from "components/InterviewerList"
 import Appointment from "components/Appointment/index.js";
 import Header from "components/Appointment/Header.js";
+import Empty from "components/Appointment/Empty.js";
 
 // import 했으니까 index가 parent, import 됀 것들은 child.
 
@@ -157,7 +158,7 @@ storiesOf("InterviewerList", module)
     />
   ));
 
-//============= APPOINTMENT ===========//
+//============= APPOINTMENT ============//
 
 storiesOf("Appointment", module)
   .addParameters({
@@ -166,3 +167,4 @@ storiesOf("Appointment", module)
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
