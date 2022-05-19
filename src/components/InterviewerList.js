@@ -3,7 +3,8 @@ import InterviewerListItem from "./InterviewerListItem";
 import "components/InterviewerList.scss";
 
 export default function InterviewerList(props) {
-  const arr = props.interviewers.map((interviewer) => // mapping through 3 days in the days array in index.js
+  const arr = props.interviewers.map((interviewer) => // mapping through 5 interviewers in the Interviewers array in index.js
+
     <InterviewerListItem
       // index.js: Interviewers array -> each interviewer object has id, name, avatar keys.
       key={interviewer.id}
@@ -14,7 +15,8 @@ export default function InterviewerList(props) {
       // //props: interviewer, interviewers
       // setInterviewer={() => props.setInterviewer(interviewer.id)}
       selected={interviewer.id === props.value}
-      setInterviewer={() => props.onChange(interviewer.id)}
+      setInterviewer={() => props.onChange(interviewer.id)
+      }
     />
   )
 
