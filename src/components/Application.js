@@ -5,27 +5,21 @@ import Appointment from "./Appointment";
 import axios from "axios";
 
 export default function Application(props) {
-  // const [day, setDay] = useState('Monday')
-  // const [days, setDays] = useState([]);
-  // const [appointments, setAppointments] = useState({})
+  const setDay = day => setState({ ...state, day }); //setState: part of useState.
+  const setDays = days => setState(prev => ({ ...prev, days })); //...prev: useState object. { } // copy over the whole object but only replace the days key. 
+  // bug proof.
+  // old state still thinks the day is monday even if you change to tuesday...
 
-
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
+  const [state, setState] = useState({ //useState comes from react.
+    day: "Monday", //initial vaue
+    days: [], // in the beginning empty array, useEffect runs when app first loads. 
     // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {}
   });
 
-  const setDay = day => setState({ ...state, day });
-  const setDays = days => setState(prev => ({ ...prev, days })); ///얘는 왜 prev 해야돼고 state로 안돼는가?
-
   useEffect(() => {
-    const url = '/api/days'
-    axios.get(url).then(response => {
-      setDays([...response.data])
-    });
-  }, []) // empty array - run only once. 
+    axios.get("/api/days").then(response => setDays(response.data)); //response.data === days.
+  }, []); //empty array - run only once. 
 
   return (
     <main className="layout">
@@ -125,3 +119,8 @@ const appointments = {
     time: "4pm",
   }
 };
+
+
+  // const [day, setDay] = useState('Monday')
+  // const [days, setDays] = useState([]);
+  // const [appointments, setAppointments] = useState({})
