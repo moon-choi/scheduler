@@ -1,66 +1,34 @@
 export function getAppointmentsForDay(state, day) {
 
-  const thisDay = state.days.find(oneDay =>
-    oneDay.name === day) // 주어진 데이에 해당하는 걸 뽑아냄. just a day. 
+  //======== solution 1. Find & Filter =========//
 
-  const appsArr = thisDay.appointments;// 해당 데이의 app arr. [4,5]
+  const tuesday = state.days.find(x => x.name === day)
 
-  //======== solution 1. Filter =========//
-  const apps = Object.values(state.appointments)
-  // [ 
-  // { id: 1, time: "12pm", interview: null }, 
-  // { id: 2, time: "1pm", interview: null },
-  // ]  
-  // each app's details in array
-  const thisDayApp = apps.filter(item => appsArr.includes(item.id))
+  // if (state.days.length < 1) {
+  //   return []
+  // }
 
-  //======== solution 2. For loop ========//
+  if (!tuesday) {
+    return []; // to pass last 2 tests.
+  }
+
+  // 주어진 데이에 해당하는 걸 뽑아냄. just 'tuesday' object.
+  const tuesdayApps = tuesday.appointments;// tuesday 의 app [4,5]
+  const appDetails = Object.values(state.appointments) // [ { id: 1,  time: ..}, { id: 2, time:  ..}, {id: 4..}, {id:5..} ]
+  const finalApp = appDetails.filter(item => tuesdayApps.includes(item.id))
+  //[ {id: 4}, {id: 5} ]
+
+  //========= solution 2. Map =========//
+
+  const myApp = tuesdayApps.map(item => state.appointments[item])
+  console.log('myApp', myApp)
+
+  //======== solution 3. For loop ========//
+
   const results = [];
-  for (const x of appsArr) {
+  for (const x of tuesdayApps) {
     results.push(state.appointments[x]);
   }
-  console.log('RESULTS', results)
 
-  //========= solution 3. Map =========//
-  // const thisDayAppointment = .map(item => item.id)
-  console.log('thisdayapp', thisDayApp)
-  return thisDayApp
+  return finalApp
 }
-
-
-// function selectUserByName(state, name) {
-//   const filteredNames = state.users.filter(user => user.name === name);
-//   return filteredNames;
-// }
-
-/* TO BE DELETED
-const state = {
-  days: [
-    {
-      id: 1,
-      name: "Monday",
-      appointments: [1, 2, 3]
-    },
-    {
-      id: 2,
-      name: "Tuesday",
-      appointments: [4, 5]
-    }
-  ],
-  appointments: {
-    "1": { id: 1, time: "12pm", interview: null },
-    "2": { id: 2, time: "1pm", interview: null },
-    "3": {
-      id: 3,
-      time: "2pm",
-      interview: { student: "Archie Cohen", interviewer: 2 }
-    },
-    "4": { id: 4, time: "3pm", interview: null },
-    "5": {
-      id: 5,
-      time: "4pm",
-      interview: { student: "Chad Takahashi", interviewer: 2 }
-    }
-  }
-};
-*/

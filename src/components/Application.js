@@ -4,50 +4,21 @@ import DayList from "./DayList";
 import Appointment from "./Appointment";
 import axios from "axios";
 
-//========== MOCK DATA : appointments =========//
-
-const appointments = {
-  "1": {
-    id: 1,
-    time: "12pm",
-  },
-  "2": {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  "3": {
-    id: 3,
-    time: "2pm",
-  },
-  "4": {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Andrews",
-      interviewer: {
-        id: 4,
-        name: "Cohana Roy",
-        avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
-  },
-  "5": {
-    id: 5,
-    time: "4pm",
-  }
-};
-
 export default function Application(props) {
-  const [day, setDay] = useState('Monday')
-  const [days, setDays] = useState([]);
+  // const [day, setDay] = useState('Monday')
+  // const [days, setDays] = useState([]);
+  // const [appointments, setAppointments] = useState({})
+
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    // you may put the line below, but will have to remove/comment hardcoded appointments variable
+    appointments: {}
+  });
+
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState(prev => ({ ...prev, days })); ///얘는 왜 prev 해야돼고 state로 안돼는가?
 
   useEffect(() => {
     const url = '/api/days'
@@ -67,9 +38,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days}
-            value={day}
-            onChange={setDay}
+            days={state.days}
+            value={state.day} //day={state.day}
+            onChange={setDay} //setDay={.....}
           />
         </nav>
         <img
@@ -113,3 +84,44 @@ export default function Application(props) {
 //     spots: 0,
 //   },
 // ];
+
+//========== MOCK DATA : appointments =========//
+
+const appointments = {
+  "1": {
+    id: 1,
+    time: "12pm",
+  },
+  "2": {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 3,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+  "3": {
+    id: 3,
+    time: "2pm",
+  },
+  "4": {
+    id: 4,
+    time: "3pm",
+    interview: {
+      student: "Archie Andrews",
+      interviewer: {
+        id: 4,
+        name: "Cohana Roy",
+        avatar: "https://i.imgur.com/FK8V841.jpg",
+      }
+    }
+  },
+  "5": {
+    id: 5,
+    time: "4pm",
+  }
+};
