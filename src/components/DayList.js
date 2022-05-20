@@ -8,7 +8,7 @@ export default function DayList(props) {
       name={day.name}
       spots={day.spots}
       selected={day.name === props.value} //day.name: left side in storybook.
-      setDay={() => props.onChange}
+      setDay={() => props.onChange(day.name)} // callback fn is to run it later.
     />
   )
   return (
