@@ -1,34 +1,46 @@
+//=========== GET APPOINTMENTS ===========//
+
+
 export function getAppointmentsForDay(state, day) {
 
-  //======== solution 1. Find & Filter =========//
+  //--------- solution 1. Find & Filter ---------//
 
-  const tuesday = state.days.find(x => x.name === day)
-
-  // if (state.days.length < 1) {
-  //   return []
-  // }
-
-  if (!tuesday) {
+  const thisDay = state.days.find(x => x.name === day)
+  if (!thisDay) {
     return []; // to pass last 2 tests.
   }
-
   // 주어진 데이에 해당하는 걸 뽑아냄. just 'tuesday' object.
-  const tuesdayApps = tuesday.appointments;// tuesday 의 app [4,5]
+  const thisDayApps = thisDay.appointments;// tuesday 의 app [4,5]
   const appDetails = Object.values(state.appointments) // [ { id: 1,  time: ..}, { id: 2, time:  ..}, {id: 4..}, {id:5..} ]
-  const finalApp = appDetails.filter(item => tuesdayApps.includes(item.id))
+  const finalApp = appDetails.filter(item => thisDayApps.includes(item.id))
   //[ {id: 4}, {id: 5} ]
+  //--------- solution 2. Map ---------//
 
-  //========= solution 2. Map =========//
-
-  const myApp = tuesdayApps.map(item => state.appointments[item])
-  console.log('myApp', myApp)
-
-  //======== solution 3. For loop ========//
+  const myApp = thisDayApps.map(item => state.appointments[item])
+  //  return myaPP
+  //---------solution 3. For loop ---------//
 
   const results = [];
-  for (const x of tuesdayApps) {
+  for (const x of thisDayApps) {
     results.push(state.appointments[x]);
   }
 
-  return finalApp
+  return results
 }
+
+//=========== GET INTERVIEWS ===========//
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null
+  }
+  console.log(state.student)
+  console.log(state.appointments.interview)
+  const result = {
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer]
+  }
+  return result
+}
+
+
