@@ -4,9 +4,6 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-  console.log('mode: ', mode)
-  console.log('history: ', history)
-
   const transition = (mode, replaceLatestHistoryItem = false) => {
     // REPLACE = true: instead of adding to the history, 
     // 1, 2, 3
@@ -21,8 +18,6 @@ export default function useVisualMode(initial) {
     } else {
       setMode(mode)
       setHistory([...history, mode])
-      console.log('transition - mode: ', mode)
-      console.log('transition - history: ', history)
     }
   };
 
@@ -33,7 +28,6 @@ export default function useVisualMode(initial) {
       setMode(history[history.length - 2])
       setHistory(history.slice(0, history.length - 1))
     }
-
   };
 
   return {
