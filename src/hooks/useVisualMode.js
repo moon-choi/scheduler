@@ -14,6 +14,7 @@ export default function useVisualMode(initial) {
       setMode(mode);
       history.pop(); //they don't return the array.
       setHistory([...history, mode]);
+      //setHistory.splice(history.length-1, 1, mode)
 
     } else {
       setMode(mode)
