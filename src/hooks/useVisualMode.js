@@ -4,23 +4,37 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-  const transition = mode => {
-    setMode(mode)
-    setHistory([...history, mode])
+  console.log('mode: ', mode)
+  console.log('history: ', history)
+
+  const transition = (mode, replaceLatestHistoryItem = false) => {
+    // REPLACE = true: instead of adding to the history, 
+    // 1, 2, 3
+    // replace = true: 1,2,1
+    // replace = false: 1,2,3,1
+
+    if (replaceLatestHistoryItem === true) { //replace the current state but do not add to the history. 
+      setMode(mode);
+      history.pop(); //they don't return the array.
+      setHistory([...history, mode]);
+
+    } else {
+      setMode(mode)
+      setHistory([...history, mode])
+      console.log('transition - mode: ', mode)
+      console.log('transition - history: ', history)
+    }
   };
+
   const back = () => {
-    if (mode === initial) {
-      return
+    if (history.length === 1) {
+      return;
+    } else {
+      setMode(history[history.length - 2])
+      setHistory(history.slice(0, history.length - 1))
     }
 
-    setMode(history[history.length - 2])
-    setHistory(history.slice(0, history.length - 1))
   };
-
-
-
-  console.log('mode', mode)
-  console.log('history', history)
 
   return {
     mode,
