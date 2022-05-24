@@ -26,10 +26,30 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day) // this is an array
 
   const bookInterview = (id, interview) => { //2
-    console.log('ID', id)
-    console.log('INTERVIEW', interview)
-    // console.log('STATE', state)
 
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return axios.put(`/api/appointments/${id}`, { interview })
+      // by returning axios, you are giving this back to the .then after props.bookInterview()
+      //3.async //we are waiting for axios to be done.
+      .then((response) => { //4
+        setState({
+          ...state,
+          appointments: appointments
+          // or just appointments only with destructuring
+        });
+        return interview //5
+      })
+  }
+
+  const editInterview = (id, interview) => { //2
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -56,16 +76,15 @@ export default function Application(props) {
 
     const appointment = {
       ...state.appointments[id],
-      interview: null
+      interview: null //wiping out the interview value object and  reset to null. 
     };
 
     const appointments = {
       ...state.appointments,
-      [id]: appointment //updating the value to null 
+      [id]: appointment //updating the whole appointment data.
     };
-    const url = `/api/appointments/${id}`
 
-    return axios.delete(url)
+    return axios.delete(`/api/appointments/${id}`)
       .then((response) => {
         setState({
           ...state,
@@ -75,35 +94,9 @@ export default function Application(props) {
 
   }
 
-  const editInterview = (id, interview) => { //2
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    return axios.put(`/api/appointments/${id}`, { interview })
-      // by returning axios, you are giving this back to the .then after props.bookInterview()
-      //3.async //we are waiting for axios to be done.
-      .then((response) => { //4
-        setState({
-          ...state,
-          appointments: appointments
-          // or just appointments only with destructuring
-        });
-        return interview //5
-      })
-  }
-
-
   const dailySchedule = dailyAppointments.map(appointment => {
 
-
     const interview = getInterview(state, appointment.interview);
-    console.log('interviewer', props.interviewer)
     return <Appointment
       key={appointment.id}
       id={appointment.id}
@@ -112,6 +105,7 @@ export default function Application(props) {
       interviewers={interviewers}
       bookInterview={bookInterview}
       cancelInterview={cancelInterview}
+      editInterview={editInterview}
     // Then pass bookInterview to each Appointment component as props.
     />
 

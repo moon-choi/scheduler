@@ -14,7 +14,7 @@ export default function InterviewerList(props) {
       // selected={interviewer.id === props.interviewer}
       // //props: interviewer, interviewers
       // setInterviewer={() => props.setInterviewer(interviewer.id)}
-      selected={interviewer.id === props.value}
+      selected={interviewer.id === props.value} //looking for the ID. // need this for styling
       setInterviewer={() => props.onChange(interviewer.id) // it becomes 2 here.
       }
     />

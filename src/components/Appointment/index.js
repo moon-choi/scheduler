@@ -21,7 +21,6 @@ export default function Appointment(props) {
   );
 
   const save = (name, interviewer) => {
-    console.log('interviewer', interviewer)
     const interview = {
       student: name,
       interviewer
@@ -41,22 +40,6 @@ export default function Appointment(props) {
         transition(EMPTY);
       })
   }
-
-  const edit = (name, interviewer) => {
-    const interview = {
-      student: name,
-      interviewer
-    };
-    transition(EDIT);
-    props.bookInterview(props.id, interview) //1 //bookInterview has to return a promise.
-      .then(() => { //6 (.then is waiting for the axios promise to be resolved)
-        transition(SHOW);
-      })
-
-
-  }
-
-  console.log('props.interview', props.interview)
 
   return (
     <article className="appointment">
@@ -79,7 +62,7 @@ export default function Appointment(props) {
       {mode === SAVING && <Status message={SAVING} />}
       {mode === DELETING && <Status message={DELETING} />}
       {mode === CONFIRM && <Confirm onCancel={back} onConfirm={remove} />}
-      {/* {mode === EDIT && } */}
+      {mode === EDIT && <Form onSave={save} onCancel={back} student={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} />}
 
     </article>
 
