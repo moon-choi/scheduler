@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
+
 import axios from "axios";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import {
+  getAppointmentsForDay, getInterview, getInterviewersForDay
+} from "helpers/selectors";
 
 
 export default function Application(props) {
-  const setDay = day => setState({ ...state, day }); //setState: part of useState.
+  const setDay = (day) => setState({ ...state, day: day }); //setState: part of useState.
   // const setDays = days => setState(prev => ({ ...prev, days })); //...prev: useState object. { } // copy over the whole object but only replace the days key. 
   // bug proof.
   // old state still thinks the day is monday even if you change to tuesday...
@@ -20,15 +23,49 @@ export default function Application(props) {
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day)
+  const interviewers = getInterviewersForDay(state, state.day) // this is an array
+
+  const bookInterview = (id, interview) => { //2
+    console.log('ID', id)
+    console.log('INTERVIEW', interview)
+    // console.log('STATE', state)
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return axios.put(`/api/appointments/${id}`, { interview })
+      // by returning axios, you are giving this back to the .then after props.bookInterview()
+      //3.async //we are waiting for axios to be done.
+      .then((response) => { //4
+        setState({
+          ...state,
+          appointments: appointments
+          // or just appointments only with destructuring
+        });
+        return interview //5
+      })
+  }
 
   const dailySchedule = dailyAppointments.map(appointment => {
+
+
     const interview = getInterview(state, appointment.interview);
+    console.log('interviewer', props.interviewer)
     return <Appointment
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
       interview={interview}
+      interviewers={interviewers}
+      bookInterview={bookInterview} /// Then pass bookInterview to each Appointment component as props.
     />
+
   })
 
   useEffect(() => {
@@ -70,13 +107,11 @@ export default function Application(props) {
       <section className="schedule">
         {dailySchedule}
         <Appointment key="last" time="5pm" />
+        {/* this is decorative, visual purposes */}
       </section>
     </main>
   );
-}
-
-
-
+};
 
 
 

@@ -57,7 +57,7 @@ export function getInterviewersForDay(state, day) {
   // console.log('thisDayInts', thisDayInts)
   const intDetails = Object.values(state.interviewers)
   // console.log('intDetails', intDetails)
-  const finalIntDetails = intDetails.filter(x => thisDayInts.includes(x.id))
+  const finalIntDetails = intDetails.filter(x => thisDayInts.includes(x.id)) //filter returns an array
   // console.log('finalIntDetails', finalIntDetails)
   return finalIntDetails
 }
