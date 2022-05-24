@@ -11,7 +11,7 @@ import {
 
 export default function Application(props) {
   const setDay = (day) => setState({ ...state, day: day }); //setState: part of useState.
-  // const setDays = days => setState(prev => ({ ...prev, days })); //...prev: useState object. { } // copy over the whole object but only replace the days key. 
+  // const setDays = days => setState(prev => ({ ...prev, days })); //...prev: useState object. { } // copy over the whole object but only replace the days key.
   // bug proof.
   // old state still thinks the day is monday even if you change to tuesday...
 
@@ -52,6 +52,29 @@ export default function Application(props) {
       })
   }
 
+  const cancelInterview = (id) => {
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment //updating the value to null 
+    };
+    const url = `/api/appointments/${id}`
+
+    return axios.delete(url)
+      .then((response) => {
+        setState({
+          ...state,
+          appointments: appointments
+        })
+      })
+
+  }
+
   const dailySchedule = dailyAppointments.map(appointment => {
 
 
@@ -63,7 +86,9 @@ export default function Application(props) {
       time={appointment.time}
       interview={interview}
       interviewers={interviewers}
-      bookInterview={bookInterview} /// Then pass bookInterview to each Appointment component as props.
+      bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
+    // Then pass bookInterview to each Appointment component as props.
     />
 
   })
