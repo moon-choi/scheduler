@@ -13,7 +13,9 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
-const EDIT = "EDIT"
+const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_REMOVE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -30,14 +32,20 @@ export default function Appointment(props) {
       .then(() => { //6 (.then is waiting for the axios promise to be resolved)
         transition(SHOW);
       })
+      .catch(() => {
+        transition(ERROR_SAVE, true)
+      })
     // return 'moon'; //for test with Ahana
   }
 
   const remove = () => {
-    transition(DELETING);
+    transition(DELETING, true);
     props.cancelInterview(props.id)
       .then(() => {
         transition(EMPTY);
+      })
+      .catch(() => {
+        transition(ERROR_REMOVE, true)
       })
   }
 
