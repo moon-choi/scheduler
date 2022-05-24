@@ -42,6 +42,22 @@ export default function Appointment(props) {
       })
   }
 
+  const edit = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    transition(EDIT);
+    props.bookInterview(props.id, interview) //1 //bookInterview has to return a promise.
+      .then(() => { //6 (.then is waiting for the axios promise to be resolved)
+        transition(SHOW);
+      })
+
+
+  }
+
+  console.log('props.interview', props.interview)
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -63,6 +79,8 @@ export default function Appointment(props) {
       {mode === SAVING && <Status message={SAVING} />}
       {mode === DELETING && <Status message={DELETING} />}
       {mode === CONFIRM && <Confirm onCancel={back} onConfirm={remove} />}
+      {/* {mode === EDIT && } */}
+
     </article>
 
   )
