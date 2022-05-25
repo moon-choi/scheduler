@@ -15,6 +15,36 @@ export default function useApplicationData() {
   // bug proof.
   // old state still thinks the day is monday even if you change to tuesday...
 
+  const updateSpots = (state, appointments, id) => { //id is appointment id 1-5:mon, 6-10:tuesday
+
+    const newDays = state.days.map(day => {
+      for (const appID of day.appointments) {
+        if (appID === id) {
+
+          let counter = 0;
+          for (const appNum of day.appointments) {
+            const foundApp = Object.values(appointments).find(x => {
+              console.log(x.id, appNum)
+              return x.id === appNum
+            })
+
+            if (foundApp.interview === null) {
+              counter++;
+            }
+          }
+          return { ...day, spots: counter };
+        } // we have to finish the loop and give every day a chance
+      }
+      return { ...day }
+    })
+    console.log('newDAYS', newDays)
+    if (newDays.length === 0) {
+      console.log('invalid appointment ID')
+      return false;
+    }
+    return newDays;
+  };
+
   const bookInterview = (id, interview) => { //2
 
     const appointment = {
@@ -30,6 +60,7 @@ export default function useApplicationData() {
       // by returning axios, you are giving this back to the .then after props.bookInterview()
       //3.async //we are waiting for axios to be done.
       .then((response) => { //4
+        updateSpots(id);
         setState({
           ...state,
           appointments: appointments
@@ -74,8 +105,9 @@ export default function useApplicationData() {
       [id]: appointment //updating the whole appointment data.
     };
 
-    return axios.delete(`/api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${id}`) //deleting in the database.
       .then((response) => {
+        updateSpots(id);
         setState({
           ...state,
           appointments: appointments
@@ -101,8 +133,9 @@ export default function useApplicationData() {
   return ({
     state,
     setDay,
+    updateSpots,
     bookInterview,
     editInterview,
     cancelInterview
-  });
+  })
 };
