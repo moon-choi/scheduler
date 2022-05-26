@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -60,7 +61,7 @@ export default function useApplicationData() {
       //3.async //we are waiting for axios to be done.
       .then((response) => { //4
         const newDays = updateSpots(state, appointments, id);
-        updateSpots(id); //PROBLEM CODE
+        // updateSpots(id); //PROBLEM CODE
         setState({
           ...state,
           appointments: appointments,
@@ -109,7 +110,8 @@ export default function useApplicationData() {
     return axios.delete(`/api/appointments/${id}`) //deleting in the database.
       .then((response) => {
         const newDays = updateSpots(state, appointments, id);
-        updateSpots(id); //PROBLEM CODE
+        // throw ('error'); // you have to error out before the erroneous change is refelcted in the state.
+
         setState({
           ...state,
           appointments: appointments,
