@@ -12,8 +12,9 @@ export default function useVisualMode(initial) {
 
     if (replaceLatestHistoryItem === true) { //replace the current state but do not add to the history. 
       setMode(mode);
-      history.pop(); //they don't return the array.
-      setHistory([...history, mode]);
+      const copiedHistory = [...history] // 
+      const poppedEl = copiedHistory.pop(); //they don't return the array.
+      setHistory([...copiedHistory, mode]);
       //setHistory.splice(history.length-1, 1, mode)
 
     } else {
@@ -23,13 +24,12 @@ export default function useVisualMode(initial) {
   };
 
   const back = () => {
-    if (history.length === 1) {
-      return;
-    } else {
-      setMode(history[history.length - 2])
-      setHistory(history.slice(0, history.length - 1))
-    }
+    if (history.length === 1) return;
+    setMode(history[history.length - 2])
+    setHistory(history.slice(0, history.length - 1))
   };
+
+  console.log('useVisualMode.js - history', history)
 
   return {
     mode,

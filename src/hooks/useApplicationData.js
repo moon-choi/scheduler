@@ -59,10 +59,12 @@ export default function useApplicationData() {
       // by returning axios, you are giving this back to the .then after props.bookInterview()
       //3.async //we are waiting for axios to be done.
       .then((response) => { //4
-        updateSpots(id);
+        const newDays = updateSpots(state, appointments, id);
+        updateSpots(id); //PROBLEM CODE
         setState({
           ...state,
-          appointments: appointments
+          appointments: appointments,
+          days: newDays
           // or just appointments only with destructuring
         });
         return interview //5
@@ -106,10 +108,12 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`) //deleting in the database.
       .then((response) => {
-        updateSpots(id);
+        const newDays = updateSpots(state, appointments, id);
+        updateSpots(id); //PROBLEM CODE
         setState({
           ...state,
-          appointments: appointments
+          appointments: appointments,
+          days: newDays
         })
       })
 

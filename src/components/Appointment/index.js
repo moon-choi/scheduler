@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.scss";
 import Header from "./Header";
 import Empty from "./Empty";
+import Error from "./Error";
 import Show from "./Show";
 import Form from "./Form";
 import Status from "./Status";
@@ -15,7 +16,7 @@ const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
-const ERROR_REMOVE = "ERROR_DELETE";
+const ERROR_REMOVE = "ERROR_REMOVE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -71,6 +72,8 @@ export default function Appointment(props) {
       {mode === DELETING && <Status message={DELETING} />}
       {mode === CONFIRM && <Confirm onCancel={back} onConfirm={remove} />}
       {mode === EDIT && <Form onSave={save} onCancel={back} student={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} />}
+      {mode === ERROR_SAVE && <Error message={ERROR_REMOVE} onClose={back} />}
+      {mode === ERROR_REMOVE && <Error message={ERROR_REMOVE} onClose={back} />}
 
     </article>
 
