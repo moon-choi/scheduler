@@ -21,3 +21,7 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Demo video
+
+https://share.getcloudapp.com/o0uG4w8b

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import InterviewerListItem from "./InterviewerListItem";
 import "components/InterviewerList.scss";
 
@@ -20,7 +21,6 @@ export default function InterviewerList(props) {
     />
   )
 
-
   return (
     <section className="interviewerListClass">
       <h4 className="interviewers__header text--light">Interviewer</h4>
@@ -33,3 +33,8 @@ export default function InterviewerList(props) {
 //   interviewers:array - an array of objects as seen above
 //   setInterviewer:function - a function that accepts an interviewer id. This function will simply be passed down to the <InterviewerListItem>
 //     interviewer:number - a number that represents the id of the currently selected interviewer
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};
+
