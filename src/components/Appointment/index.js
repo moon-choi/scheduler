@@ -19,14 +19,18 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_REMOVE = "ERROR_REMOVE";
 
 export default function Appointment(props) {
+  //=========== STATE ========== // 
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  //=========== FUNCS ========== // 
+
   const save = (name, interviewer) => {
     const interview = {
       student: name,
-      interviewer
+      interviewer: interviewer //this is an object.
     };
     transition(SAVING); //this is loading animation
     props.bookInterview(props.id, interview) //1 //bookInterview has to return a promise.
