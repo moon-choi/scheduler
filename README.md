@@ -22,6 +22,14 @@ npm test
 npm run storybook
 ```
 
+## Screenshots
+
+![Screenshot of Create](docs/scheduler-create.png?raw=true "Create Appointments")
+
+![Screenshot of Edit](docs/scheduler-edit.png?raw=true "Edit Appointments")
+
+![Screenshot of Delete Confirmation](docs/scheduler-delete.png?raw=true "Cancel Appointment")
+
 ## Demo video
 
 https://share.getcloudapp.com/o0uG4w8b
