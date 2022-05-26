@@ -16,8 +16,7 @@ export default function useApplicationData() {
   // old state still thinks the day is monday even if you change to tuesday...
 
   const updateSpots = (state, appointments, id) => { //id is appointment id 1-5:mon, 6-10:tuesday
-
-    const newDays = state.days.map(day => {
+    const newSpots = state.days.map(day => {
       for (const appID of day.appointments) {
         if (appID === id) {
 
@@ -37,12 +36,12 @@ export default function useApplicationData() {
       }
       return { ...day }
     })
-    console.log('newDAYS', newDays)
-    if (newDays.length === 0) {
+    // console.log('newDAYS', newDays)
+    if (newSpots.length === 0) {
       console.log('invalid appointment ID')
       return false;
     }
-    return newDays;
+    return newSpots;
   };
 
   const bookInterview = (id, interview) => { //2

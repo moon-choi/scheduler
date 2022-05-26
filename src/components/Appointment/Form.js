@@ -23,6 +23,7 @@ export default function Form(props) {
       <section className="appointment__card-left">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <input
+            data-testid="student-name-input"
             className="appointment__create-input text--semi-bold"
             name="student_name" //good practice - you will lose HTML5 default behaviour.
             type="text" //good practice - you will lose HTML5 default behaviour. (e.g. password protetction ***)
