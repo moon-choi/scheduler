@@ -11,7 +11,7 @@ This app allows you to book and update interviews with instructors.
 ## Running Webpack Development Server
 
 ```
-    npm start
+npm start
 ```
 
 ## Dependencies
@@ -41,13 +41,13 @@ This app allows you to book and update interviews with instructors.
 
 ## Running Tests
 
-* `npm test`  
+- `npm test`
 
-* `npm run storybook` visit http://localhost:9009  
+- `npm run storybook` visit http://localhost:9009
 
-* `npm run cypress` 
+- `npm run cypress`
 
-* run Scheduler API with `NODE_ENV=test npm start`  
+- run Scheduler API with `NODE_ENV=test npm start`
 
 ## Screenshots
 
