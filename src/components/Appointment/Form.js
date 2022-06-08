@@ -31,9 +31,8 @@ export default function Form(props) {
       return;
     }
 
-    props.onSave(student, interviewer.id); //validate calls save.. so i should use validate for everywhere that used save?
+    props.onSave(student, interviewer); // interviewer here refers to interviewer id.
   }
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">

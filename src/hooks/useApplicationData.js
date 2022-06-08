@@ -20,7 +20,6 @@ export default function useApplicationData() {
           let counter = 0;
           for (const appNum of day.appointments) {
             const foundApp = Object.values(appointments).find(x => {
-              console.log(x.id, appNum)
               return x.id === appNum
             })
 
