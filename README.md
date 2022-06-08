@@ -10,14 +10,8 @@ This app allows you to book and update interviews with instructors.
 
 ## Running Webpack Development Server
 
-```sh
-  npm start
-  ```
-
-````
-
-## Running Jest Test Framework
-
+```
+    npm start
 ```
 
 ## Dependencies
@@ -45,30 +39,15 @@ This app allows you to book and update interviews with instructors.
 - react-test-renderer
 - sass
 
+## Running Tests
 
-# Run tests
+* `npm test`  
 
-```
-- t-test^16.9.0",
-- ": "^1.51.0"": "^1.- - - h
-  npm run storybook
+* `npm run storybook` visit http://localhost:9009  
 
-```
+* `npm run cypress` 
 
-## Screenshots
-
-![Screenshot of Create](docs/scheduler-create.png?raw=true "Create Appointments")
-
-![Screenshot of Edit](docs/scheduler-edit.png?raw=true "Edit Appointments")
-
-![Screenshot of Delete Confirmation](docs/scheduler-delete.png?raw=true "Cancel Appointment")
-
-## Demo video
-
-https://share.getcloudapp.com/o0uG4w8b
-```
-
-```
+* run Scheduler API with `NODE_ENV=test npm start`  
 
 ## Screenshots
 
@@ -81,4 +60,3 @@ https://share.getcloudapp.com/o0uG4w8b
 ## Demo video
 
 https://share.getcloudapp.com/o0uG4w8b
-```

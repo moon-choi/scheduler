@@ -28,7 +28,6 @@ export default function Appointment(props) {
   //=========== FUNCS ========== // 
 
   const save = (name, interviewer) => {
-    console.log(name, interviewer)
     const interview = {
       student: name,
       interviewer: interviewer //this is an object.
