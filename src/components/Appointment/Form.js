@@ -6,11 +6,8 @@ export default function Form(props) {
 
   //=========== STATE ========== // 
   const [student, setStudent] = useState(props.student || "");
-  //props.student (when you edit)
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-
-  //props.interviewer (when you edit)
 
   //=========== FUNCS ========== // 
   const reset = () => {
@@ -37,8 +34,6 @@ export default function Form(props) {
     props.onSave(student, interviewer.id); //validate calls save.. so i should use validate for everywhere that used save?
   }
 
-  console.log('Form.js - INTERVIEWER', interviewer)
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -62,9 +57,7 @@ export default function Form(props) {
           <Button confirm onClick={() => {
             validate();
           }}>Save</Button>
-          {/* 
-          //() => props.onSave(student, interviewer) // i will give a function
-          // props.onSave(student, interviewer) // i am just feeding an object */}
+
         </section>
       </section>
     </main>

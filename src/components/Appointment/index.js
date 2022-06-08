@@ -40,7 +40,6 @@ export default function Appointment(props) {
       .catch(() => {
         transition(ERROR_SAVE, true)
       })
-    // return 'moon'; //for test with Ahana
   }
 
   const remove = () => {
@@ -57,9 +56,7 @@ export default function Appointment(props) {
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {/* Header should contain props.time value */}
 
-      {/* {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer.name} /> : <Empty />} */}
 
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
