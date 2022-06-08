@@ -7,9 +7,10 @@ export default function useVisualMode(initial) {
   const transition = (mode, replaceLatestHistoryItem = false) => {
     // REPLACE = true: instead of adding to the history, 
 
-    if (replaceLatestHistoryItem === true) { 
+    if (replaceLatestHistoryItem === true) {
       setMode(mode);
       const copiedHistory = [...history];
+      copiedHistory.pop()
       setHistory([...copiedHistory, mode]);
 
     } else {
